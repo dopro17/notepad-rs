@@ -2,6 +2,7 @@
 name = "notepad-rs"
 version = "0.1.0"
 edition = "2024"
+description = "Clone do Bloco de Notas em Rust (egui + muda)"
 
 [dependencies]
 anyhow = "1.0.104"
@@ -12,3 +13,32 @@ muda = "0.21.2"
 rfd = "0.17.2"
 serde = { version = "1.0.229", features = ["derive"] }
 serde_json = "1.0.154"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+egui = "0.37.0"
+image = { version = "0.25", default-features = false, features = ["png"], optional = true }
+
+[features]
+screenshot = ["dep:image"]
+
+[target.'cfg(target_os = "windows")'.dependencies]
+raw-window-handle = "0.6"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "0.6"
+objc2-foundation = { version = "0.3", default-features = false, features = ["std", "NSAppleEventManager", "NSAppleEventDescriptor", "NSURL", "NSString", "NSObject"] }
+
+[package.metadata.bundle]
+name = "notepad-rs"
+identifier = "br.com.prodocimo.notepad-rs"
+icon = ["assets/icon.icns"]
+category = "public.app-category.productivity"
+short_description = "Clone do Bloco de Notas em Rust"
+copyright = "© 2026 Douglas Prodocimo"
+
+[package.metadata.bundle.osx]
+minimum_system_version = "11.0"
+info_plist_exts = ["assets/document-types.plist"]
+
+[profile.release]
+lto = "thin"
+strip = true
