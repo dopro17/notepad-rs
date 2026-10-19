@@ -1,0 +1,24 @@
+  <key>CFBundleDocumentTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleTypeName</key>
+      <string>Documento de texto</string>
+      <key>CFBundleTypeRole</key>
+      <string>Editor</string>
+      <key>LSHandlerRank</key>
+      <string>Alternate</string>
+      <key>LSItemContentTypes</key>
+      <array>
+        <string>public.plain-text</string>
+        <string>public.text</string>
+        <string>net.daringfireball.markdown</string>
+        <string>com.apple.log</string>
+      </array>
+      <key>CFBundleTypeExtensions</key>
+      <array>
+        <string>txt</string>
+        <string>md</string>
+        <string>log</string>
+      </array>
+    </dict>
+  </array>
