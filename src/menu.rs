@@ -245,12 +245,15 @@ pub fn consume_shortcuts(ctx: &egui::Context) -> Vec<Action> {
     actions
 }
 
+// No Linux o menu nativo não é usado (barra de menus em egui).
+#[cfg_attr(target_os = "linux", allow(dead_code))]
 pub struct NativeMenu {
     pub menu: Menu,
     word_wrap: CheckMenuItem,
     status_bar: CheckMenuItem,
 }
 
+#[cfg_attr(target_os = "linux", allow(dead_code))]
 impl NativeMenu {
     /// Monta a barra nativa. `app_menu` (macOS) é inserido como primeiro menu.
     pub fn build(app_menu: Option<Submenu>, is_mac: bool) -> Result<Self> {
@@ -301,6 +304,7 @@ impl NativeMenu {
     }
 }
 
+#[cfg_attr(target_os = "linux", allow(dead_code))]
 pub fn native_item(action: Action) -> MenuItem {
     let accel = action.binding().and_then(|(_, _, a)| a.parse().ok());
     MenuItem::with_id(action.id(), action.label(), true, accel)
