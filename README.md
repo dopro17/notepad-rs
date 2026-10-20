@@ -55,3 +55,7 @@ cargo test
 ```
 
 See [CLAUDE.md](CLAUDE.md) for the project rules and structure.
+
+## License
+
+[MIT](LICENSE)
