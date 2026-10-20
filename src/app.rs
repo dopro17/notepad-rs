@@ -171,11 +171,7 @@ impl NotepadApp {
     }
 
     fn open_dialog(&mut self) {
-        if let Some(paths) = rfd::FileDialog::new()
-            .add_filter("Documentos de texto", &["txt", "md", "log"])
-            .add_filter("Todos os arquivos", &["*"])
-            .pick_files()
-        {
+        if let Some(paths) = rfd::FileDialog::new().pick_files() {
             for path in paths {
                 self.open_path(&path);
             }
@@ -192,12 +188,7 @@ impl NotepadApp {
                     Some(_) => doc.file_name(),
                     None => "Sem título.txt".to_owned(),
                 };
-                match rfd::FileDialog::new()
-                    .add_filter("Documentos de texto", &["txt"])
-                    .add_filter("Todos os arquivos", &["*"])
-                    .set_file_name(name)
-                    .save_file()
-                {
+                match rfd::FileDialog::new().set_file_name(name).save_file() {
                     Some(p) => p,
                     None => return false,
                 }

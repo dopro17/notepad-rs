@@ -332,6 +332,16 @@ mod tests {
     }
 
     #[test]
+    fn binary_opens_as_text() {
+        // Todos os bytes exceto CR/LF (que são normalizados como em qualquer texto).
+        let bytes: Vec<u8> = (0..=255u8).filter(|b| *b != b'\r' && *b != b'\n').collect();
+        let doc = Document::from_bytes(&bytes, LineEnding::Lf);
+        assert_eq!(doc.encoding, Encoding::Windows1252);
+        assert_eq!(doc.text.chars().count(), bytes.len());
+        assert_eq!(doc.to_bytes(), bytes);
+    }
+
+    #[test]
     fn new_document_uses_default_eol() {
         let doc = Document::from_bytes(b"sem quebra", LineEnding::CrLf);
         assert_eq!(doc.eol, LineEnding::CrLf);
